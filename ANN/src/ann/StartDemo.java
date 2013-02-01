@@ -1,3 +1,26 @@
+/*
+ * CINI, Consorzio Interuniversitario Nazionale per l'Informatica
+ * Copyright 2013 CINI and/or its affiliates and other
+ * contributors as indicated by the @author tags. All rights reserved.
+ * See the copyright.txt in the distribution for a full listing of
+ * individual contributors.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 3.0 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+ */
+
 package ann;
 
 import java.io.*;
@@ -7,7 +30,6 @@ import java.rmi.RemoteException;
 import java.util.*;
 import eu.cloudtm.am.client.*;
 
-// sebastiano
 
 import eu.cloudtm.wpm.*;
 import eu.cloudtm.wpm.connector.*;
@@ -16,6 +38,10 @@ import eu.cloudtm.wpm.logService.remote.listeners.WPMStatisticsRemoteListener;
 import eu.cloudtm.wpm.logService.remote.listeners.WPMViewChangeRemoteListener;
 import eu.cloudtm.wpm.logService.remote.observables.Handle;
 
+/*
+* @author Diego Rughetti
+* @author Sebastiano Peluso
+*/
 public class StartDemo {
 	
 	private static int MINREPLICATION = 2;
@@ -99,26 +125,7 @@ public class StartDemo {
 		connector.registerViewChangeRemoteListener(viewListener);
 		
 		
-		
-		/*
-		double clientNorm = Double.valueOf(props.getProperty("clientNormalizzation")).doubleValue();
-		double serverNorm = Double.valueOf(props.getProperty("serverNormalizzation")).doubleValue();
-		double replicationNorm  = Double.valueOf(props.getProperty("replicationNormalizzation")).doubleValue();
-		double throughputNorm  = Double.valueOf(props.getProperty("throughputNormalizzation")).doubleValue();
-		double responseNorm  = Double.valueOf(props.getProperty("responseNormalizzation")).doubleValue();
-		Nns nn = new Nns(clientNorm, serverNorm, replicationNorm, throughputNorm, responseNorm);
-		nn.parseInputFile(props.getProperty("TrainingFilesPath")); // path dei file dei log per il training
-		nn.trainNetworks();
-		nn.loadNetworks();
-		ActuatorClient ac = new ActuatorClient(props.getProperty("ActuatorServer"), Integer.parseInt(props.getProperty("Port")));
-		
-		File directory = new File(props.getProperty("MonitoringFilesPath"));
-		
-		
-		File arc;
-		String f = "";
-		int clientNumber;
-		OptimalPrevision op, previousOp = null;*/
+	
 		
 		while(true){
 			
@@ -129,42 +136,7 @@ public class StartDemo {
 				e.printStackTrace();
 			}
 
-/*			String lista[] = directory.list();
-			for (String fileName : lista){
-				if(!fileName.contains(".log.ack") && fileName.contains(".log")){
-					f=fileName;
-				}
-			}
-			// parsing di f con cui inizializzo clientNumber
-			clientNumber = nn.getSampleFromInputFile(f);
-			
-			for (String fileName : lista){
-				arc = new File(fileName);
-				arc.delete();
-			}
-			
-			int minReplication = Integer.valueOf(props.getProperty("minimalReplication")).intValue();
-			int maxNodeNumber = Integer.valueOf(props.getProperty("maximumNodeNumber")).intValue();
-			op = nn.getOptimalPrevision(minReplication, maxNodeNumber, clientNumber);
-			
-			if(previousOp == null || !previousOp.equals(op)){
-				previousOp = op;
-				if(props.getProperty("OptimizzationTarget").equals("Throughput")){
-					System.out.println("Server = " + op.getServerThroughput() + " - " + "Replication = " + op.getReplicationThroughput());
-					ac.setConfiguration((int) op.getServerThroughput(),(int) op.getReplicationThroughput());
-				// setta la scelta ottimale sulla piattaforma con oggetto sebastiano
-				}else if(props.getProperty("OptimizzationTarget").equals("ResponseTime")){
-					System.out.println("Server = " + op.getServerResponseTime() + " - " + "Replication = " + op.getReplicationResponseTime());
-					ac.setConfiguration((int) op.getServerResponseTime(), (int) op.getReplicationResponseTime());
-				}else{
-					System.out.println("Invalid value for OptimizzationTarget parameter in configuration file");
-				}
-			}
-			try{
-				Thread.sleep(4000);
-			}catch (Exception e){
-				e.printStackTrace();
-			}*/
+
 		}
 	}
 }
